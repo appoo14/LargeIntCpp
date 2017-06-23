@@ -38,6 +38,12 @@ class ABLInt {
       }
 };
 
+ABLInt ABLInt::operator+(const AbLInt &x){
+            ABLInt y;
+            int ans[MAX_SIZE];
+            
+        }
+
 int main()
 {
     ABLInt x;
