@@ -51,8 +51,10 @@ ABLInt ABLInt::operator+(const ABLInt &x){
                 ans[i] = x.value[i]+this->value[i]+carry;
                 if(ans[i]/10==0)
                     carry = 0;
-                else
+                else{
                     carry = ans[i]/10;
+                    ans[i] = ans[i]%10;
+                }
             }
             for(;i<x.len;i++){
                 ans[i] = x.value[i]+carry;
@@ -74,10 +76,8 @@ ABLInt ABLInt::operator+(const ABLInt &x){
             }
             y.len = length;
             for(i=0;i<length;i++){
-                cout << ans[i];
                 y.value[i] = ans[i];
             }
-            cout<<endl;
     return y;        
 }
 
