@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 class ABLInt {
     int value[MAX_SIZE]; /* Actual value of integer as an array
                             Index 0     -> units place digit   
@@ -15,7 +16,7 @@ class ABLInt {
     
     public:
         
-        ABLInt operator+(const AbLInt &x);
+        ABLInt operator+(const ABLInt& x);
         
      friend ostream &operator<<( ostream &output, ABLInt &D ) {
          D.svalue.clear();
@@ -38,17 +39,55 @@ class ABLInt {
       }
 };
 
-ABLInt ABLInt::operator+(const AbLInt &x){
+ABLInt ABLInt::operator+(const ABLInt &x){
             ABLInt y;
             int ans[MAX_SIZE];
-            
-        }
+            int minlen = x.len < this->len ? x.len : this->len;
+            int maxlen = x.len > this->len ? x.len : this->len;
+            int carry = 0;
+            int i;
+            int length = maxlen;
+            for(i=0; i<minlen;i++){
+                ans[i] = x.value[i]+this->value[i]+carry;
+                if(ans[i]/10==0)
+                    carry = 0;
+                else
+                    carry = ans[i]/10;
+            }
+            for(;i<x.len;i++){
+                ans[i] = x.value[i]+carry;
+                if(ans[i]/10==0)
+                    carry = 0;
+                else
+                    carry = ans[i]/10;                    
+            }
+            for(;i<this->len;i++){
+                ans[i] = this->value[i]+carry;
+                if(ans[i]/10==0)
+                    carry = 0;
+                else
+                    carry = ans[i]/10;                    
+            }
+            if(carry!=0){
+                ans[i] = carry;
+                length = maxlen+1;
+            }
+            y.len = length;
+            for(i=0;i<length;i++){
+                cout << ans[i];
+                y.value[i] = ans[i];
+            }
+            cout<<endl;
+    return y;        
+}
 
 int main()
 {
-    ABLInt x;
+    ABLInt x,y,z;
     cin >> x;
-    cout << x;
+    cin >> y;
+    z = x+y;
+    cout << z;
    
    
    return 0;
